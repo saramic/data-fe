@@ -8,6 +8,23 @@
 
 This starter kit contains all the build tooling and configuration you need to kick off your next universal React project, whilst containing a minimal "project" set up allowing you to make your own architecture decisions (Redux/MobX etc).
 
+## TODO
+  - [ ] Invalid checksum errlr
+  - [ ] load some real data via Redux/API/Apollo and GraphQL
+  - [ ] other styles of charts - http://www.reactd3.org/components/
+  - [ ] try fusion charts http://www.fusioncharts.com/react-charts/#/demos/ex2
+  - [ ] try chart.js - https://reactcommunity.org/react-chartjs/index.html
+  - [ ] even more charts - https://react.rocks/tag/Chart
+  - [ ] other things to bring in from
+    [react-universally](https://github.com/ctrlplusb/react-universally/blob/master/docs/FEATURE_BRANCHES.md)
+  - [ ] EON https://www.pubnub.com/developers/eon/
+  - [ ] three.js https://threejs.org/
+  - [ ] full D3.js https://d3js.org/
+  - [ ] self hosting via [github pages](https://github.com/rafrex/spa-github-pages)
+  - [ ] self hosting via [S3 and cloudfront](https://medium.com/@omgwtfmarc/deploying-create-react-app-to-s3-or-cloudfront-48dae4ce0af#.4ebw752bb)
+  - [ ] via [now](https://github.com/ctrlplusb/react-universally/blob/master/docs/DEPLOY_TO_NOW.md)
+    https://zeit.co/now
+
 ## Features
 
   - 👀 `react` as the view.

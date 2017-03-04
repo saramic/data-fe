@@ -73,6 +73,7 @@
     "normalize.css": "5.0.0",
     "offline-plugin": "4.5.4",
     "react": "15.4.2",
+    "react-d3-basic": "^1.6.11",
     "react-dom": "15.4.2",
     "react-helmet": "3.3.0",
     "react-router": "4.0.0-alpha.6",
