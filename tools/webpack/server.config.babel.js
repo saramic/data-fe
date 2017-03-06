@@ -1,6 +1,10 @@
+/* @flow */
+
 import webpackConfigFactory from './configFactory';
 
-export default function serverConfigFactory(options = {}) {
+type Options = { mode?: 'production'|'development' };
+
+export default function serverConfigFactory(options : Options = {}) {
   const { mode = 'development' } = options;
   return webpackConfigFactory({ target: 'server', mode });
 }

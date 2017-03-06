@@ -1,13 +1,24 @@
+/* @flow */
+
 import HappyPack from 'happypack';
 import notifier from 'node-notifier';
 import colors from 'colors/safe';
 import { execSync } from 'child_process';
 import appRootDir from 'app-root-dir';
 
+type HappyPackLoaderConfig = {
+  path: string,
+  query?: Object,
+};
+
+type HappyPackConfig = {
+  name: string,
+  loaders: Array<string|HappyPackLoaderConfig>,
+};
 
 // Generates a HappyPack plugin.
 // @see https://github.com/amireh/happypack/
-export function happyPackPlugin({ name, loaders }) {
+export function happyPackPlugin({ name, loaders } : HappyPackConfig) {
   return new HappyPack({
     id: name,
     verbose: false,
@@ -17,7 +28,7 @@ export function happyPackPlugin({ name, loaders }) {
 }
 
 // Removes the empty items from the given array.
-export function removeEmpty(x) {
+export function removeEmpty(x : Array<any>) : Array<any> {
   return x.filter(y => y != null);
 }
 
@@ -47,9 +58,9 @@ export function removeEmpty(x) {
 // then this function will only be interpretted after the ifElse has run. This
 // can be handy for values that require some complex initialization process.
 // e.g. ifDev(() => 'lazy', 'not lazy');
-export function ifElse(condition) {
+export function ifElse(condition : boolean) {
   // TODO: Allow the then/or to accept a function for lazy value resolving.
-  return function ifElseResolver(then, or) {
+  return function ifElseResolver<X, Y>(then : X, or : Y) : X|Y {
     const execIfFuc = x => (typeof x === 'function' ? x() : x);
     return condition ? execIfFuc(then) : (or);
   };
@@ -57,8 +68,8 @@ export function ifElse(condition) {
 
 // Merges a set of objects together.
 // NOTE: This performs a deep merge.
-export function merge(...args) {
-  const filtered = removeEmpty(args);
+export function merge(...args : Array<?Object>) {
+  const filtered : Array<Object> = removeEmpty(args);
   if (filtered.length < 1) {
     return {};
   }
@@ -79,8 +90,14 @@ export function merge(...args) {
   }, {});
 }
 
+type NotificationOptions = {
+  title: string,
+  message: string,
+  notify?: boolean,
+  level?: 'info'|'warn'|'error'
+};
 
-export function log(options) {
+export function log(options : NotificationOptions) {
   const title = `${options.title.toUpperCase()}`;
 
   if (options.notify) {
@@ -101,6 +118,6 @@ export function log(options) {
   }
 }
 
-export function exec(command) {
+export function exec(command : string) {
   execSync(command, { stdio: 'inherit', cwd: appRootDir.get() });
 }

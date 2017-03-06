@@ -1,3 +1,5 @@
+/* @flow */
+
 import express from 'express';
 import createWebpackMiddleware from 'webpack-dev-middleware';
 import createWebpackHotMiddleware from 'webpack-hot-middleware';
@@ -5,7 +7,10 @@ import ListenerManager from './listenerManager';
 import { log } from '../utils';
 
 class HotClientServer {
-  constructor(compiler) {
+  webpackDevMiddleware: any;
+  listenerManager: ListenerManager;
+
+  constructor(compiler : Object) {
     const app = express();
 
     const httpPathRegex = /^https?:\/\/(.*):([\d]{1,5})/i;

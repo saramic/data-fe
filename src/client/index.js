@@ -1,15 +1,25 @@
+/* @flow */
 /* eslint-disable global-require */
 
 import React from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter } from 'react-router';
 import { CodeSplitProvider, rehydrateState } from 'code-split-component';
+import { Provider as ReduxProvider } from 'react-redux';
+import { rehydrateJobs } from 'react-jobs/ssr';
+import configureStore from '../shared/redux/configureStore';
 import ReactHotLoader from './components/ReactHotLoader';
-//import DemoApp from '../shared/components/DemoApp';
-import Gallery from '../shared/components/Gallery';
+import DemoApp from '../shared/components/DemoApp';
+//import Gallery from '../shared/components/Gallery';
 
 // Get the DOM Element that will host our React application.
 const container = document.querySelector('#app');
+
+// Create our Redux store.
+const store = configureStore(
+  // Server side rendering would have mounted our state on this global.
+  window.__APP_STATE__, // eslint-disable-line no-underscore-dangle
+);
 
 function renderApp(TheApp) {
   // We use the code-split-component library to provide us with code splitting
@@ -21,18 +31,23 @@ function renderApp(TheApp) {
   // to do as it will ensure that our React checksum for the client will match
   // the content returned by the server.
   // @see https://github.com/ctrlplusb/code-split-component
-  rehydrateState().then(codeSplitState =>
-    render(
+  rehydrateState().then((codeSplitState) => {
+    const app = (
       <ReactHotLoader>
         <CodeSplitProvider state={codeSplitState}>
-          <BrowserRouter>
-            <TheApp />
-          </BrowserRouter>
+          <ReduxProvider store={store}>
+            <BrowserRouter>
+              <TheApp />
+            </BrowserRouter>
+          </ReduxProvider>
         </CodeSplitProvider>
-      </ReactHotLoader>,
-      container,
-    ),
-  );
+      </ReactHotLoader>
+    );
+
+    rehydrateJobs(app).then(({ appWithJobs }) =>
+      render(appWithJobs, container),
+    );
+  });
 }
 
 // The following is needed so that we can support hot reloading our application.
@@ -41,14 +56,10 @@ if (process.env.NODE_ENV === 'development' && module.hot) {
   module.hot.accept('./index.js');
   // Any changes to our App will cause a hotload re-render.
   module.hot.accept(
-    // '../shared/components/DemoApp',
-    // () => renderApp(require('../shared/components/DemoApp').default),
+    '../shared/components/DemoApp',
+    () => renderApp(require('../shared/components/DemoApp').default),
     // '../shared/components/Gallery',
     // () => renderApp(require('../shared/components/Gallery').default),
-    '../shared/components/Gallery',
-    () => renderApp(require('../shared/components/Gallery').default),
-    '../shared/components/Gallery',
-    () => renderApp(require('../shared/components/Gallery').default),
   );
 }
 

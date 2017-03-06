@@ -1,3 +1,5 @@
+/* @flow */
+
 // Application Configuration.
 //
 // Please see the /docs/APPLICATION_CONFIG.md documentation for more info.
@@ -7,7 +9,7 @@
 
 import { getStringEnvVar, getIntEnvVar } from './internals/environmentVars';
 import filterObject from './internals/filterObject';
-
+import type { BuildOptions } from '../tools/types';
 
 // This protects us from accidentally including this configuration in our
 // client bundle. That would be a big NO NO to do. :)
@@ -297,7 +299,7 @@ const config = {
     // This function will be called once for each for your bundles.  It will be
     // provided the current webpack config, as well as the buildOptions which
     // detail which bundle and mode is being targetted for the current function run.
-    babelConfig: (babelConfig, buildOptions) => {
+    babelConfig: (babelConfig : Object, buildOptions : BuildOptions) => {
       // eslint-disable-next-line no-unused-vars
       const { target, mode } = buildOptions;
 
@@ -320,7 +322,7 @@ const config = {
     // This function will be called once for each for your bundles.  It will be
     // provided the current webpack config, as well as the buildOptions which
     // detail which bundle and mode is being targetted for the current function run.
-    webpackConfig: (webpackConfig, buildOptions) => {
+    webpackConfig: (webpackConfig : Object, buildOptions : BuildOptions) => {
       // eslint-disable-next-line no-unused-vars
       const { target, mode } = buildOptions;
 
