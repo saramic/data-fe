@@ -41,8 +41,12 @@ if (process.env.NODE_ENV === 'development' && module.hot) {
   module.hot.accept('./index.js');
   // Any changes to our App will cause a hotload re-render.
   module.hot.accept(
-    '../shared/components/DemoApp',
-    () => renderApp(require('../shared/components/DemoApp').default),
+    // '../shared/components/DemoApp',
+    // () => renderApp(require('../shared/components/DemoApp').default),
+    // '../shared/components/Gallery',
+    // () => renderApp(require('../shared/components/Gallery').default),
+    '../shared/components/Gallery',
+    () => renderApp(require('../shared/components/Gallery').default),
     '../shared/components/Gallery',
     () => renderApp(require('../shared/components/Gallery').default),
   );
