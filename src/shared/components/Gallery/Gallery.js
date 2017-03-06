@@ -44,6 +44,16 @@ function Gallery() {
         }
       />
 
+      <Match
+        exactly
+        pattern="/pubnubEon"
+        render={routerProps =>
+          <CodeSplit chunkName="pubnubEon" modules={{ PubnubEon: require('./PubnubEon') }}>
+            { ({ PubnubEon }) => PubnubEon && <PubnubEon {...routerProps} /> }
+          </CodeSplit>
+        }
+      />
+
       <Miss component={Error404} />
     </div>
   );
