@@ -11,6 +11,7 @@ import serviceWorker from './middleware/serviceWorker';
 import offlinePage from './middleware/offlinePage';
 import errorHandlers from './middleware/errorHandlers';
 import config from '../../config';
+import api from './routes/api';
 
 // Create our express based server.
 const app = express();
@@ -44,6 +45,9 @@ app.use(config.bundles.client.webPath, clientBundle);
 // Configure static serving of our "public" root http path static files.
 // Note: these will be served off the root (i.e. '/') of our application.
 app.use(express.static(pathResolve(appRootDir.get(), config.publicAssetsPath)));
+
+// Api
+app.use(...api);
 
 // The React application middleware.
 app.get('*', reactApplication);
