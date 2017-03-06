@@ -9,8 +9,8 @@ import { CodeSplitProvider, createRenderContext } from 'code-split-component';
 import Helmet from 'react-helmet';
 import { runJobs } from 'react-jobs/ssr';
 import generateHTML from './generateHTML';
-//import Gallery from '../../../shared/components/Gallery';
-import DemoApp from '../../../shared/components/DemoApp';
+import Gallery from '../../../shared/components/Gallery';
+//import DemoApp from '../../../shared/components/DemoApp';
 import configureStore from '../../../shared/redux/configureStore';
 import config from '../../../../config';
 
@@ -60,7 +60,7 @@ function reactApplicationMiddleware(request: $Request, response: $Response) {
     <CodeSplitProvider context={codeSplitContext}>
       <ServerRouter location={request.url} context={reactRouterContext}>
         <Provider store={store}>
-          <DemoApp />
+          <Gallery />
         </Provider>
       </ServerRouter>
     </CodeSplitProvider>
