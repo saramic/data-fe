@@ -4,6 +4,18 @@ import fs from 'fs';
 
 const router = express.Router();
 
+const dateAndNumbers = (data) => {
+  return Object.keys(data)
+    .reduce((hash, d) => {
+      if(d === 'Date') {
+        hash[d] = data[d]
+      } else {
+        hash[d] = parseFloat(data[d])
+      };
+      return hash;
+    }, {} )
+}
+
 router.get('/', (req, res) => res.send('API'));
 router.get('/asx/:name', (req, res) => {
   const csvData = [];
@@ -14,7 +26,7 @@ router.get('/asx/:name', (req, res) => {
     .on('headers', (headerLine) => {
       headerList.push(headerLine)
     })
-    .on('data', (data) => (csvData.push(data)))
+    .on('data', (data) => (csvData.push(dateAndNumbers(data))))
     .on('end', () => {
       // TODO move to own component
       // TODO check speed from https://www.npmjs.com/package/fast-csv
@@ -23,4 +35,4 @@ router.get('/asx/:name', (req, res) => {
     });
 });
 
-export default ['/api/v1', router];
+export default ['/api', router];
