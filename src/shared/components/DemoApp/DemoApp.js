@@ -48,6 +48,15 @@ function DemoApp() {
       />
 
       <Match
+        pattern="/graphD3"
+        render={routerProps =>
+          <CodeSplit chunkName="graphD3" modules={{ GraphD3: require('../Gallery/GraphD3') }}>
+            { ({ GraphD3 }) => GraphD3 && <GraphD3 {...routerProps} /> }
+          </CodeSplit>
+        }
+      />
+
+      <Match
         pattern="/about"
         render={routerProps =>
           <CodeSplit chunkName="about" modules={{ About: require('./About') }}>

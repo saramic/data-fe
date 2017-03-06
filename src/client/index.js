@@ -64,8 +64,8 @@ if (process.env.NODE_ENV === 'development' && module.hot) {
 }
 
 // Execute the first render of our app.
-//renderApp(DemoApp)
-renderApp(Gallery);
+renderApp(DemoApp)
+//renderApp(Gallery);
 
 // This registers our service worker for asset caching and offline support.
 // Keep this as the last item, just in case the code execution failed (thanks
