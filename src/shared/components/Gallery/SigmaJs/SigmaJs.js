@@ -54,11 +54,25 @@ class SigmaJsSub extends React.Component {
       return(<div>loading ...</div>);
     } else {
       const { Sigma, RandomizeNodePositions, RelativeSize, LoadJSON } = require('react-sigma');
+      //const {Sigma, EdgeShapes, NodeShapes, LoadJSON, LoadGEXF, Filter, ForceAtlas2,
+      //  RelativeSize, NOverlap, NeoCypher, NeoGraphItemsProducers,
+      //  RandomizeNodePositions, SigmaEnableWebGL} = require('react-sigma');
       // TODO following errors with
       // VM8232:2 GET http://localhost:1337/data/sigma_graph.json net::ERR_CONNECTION_REFUSED
       //  <Sigma style={{width:"200px", height:"200px"}}>
       //    <LoadJSON path="/data/sigma_graph.json" />
       //  </Sigma>
+      //
+      // TODO make filterNeigbours and worker work
+      //    <Sigma renderer="canvas">
+      //      <EdgeShapes default="tapered"/>
+      //      <NodeShapes default="star"/>
+      //      <LoadGEXF path="/data/les-miserables.gexf">
+      //        <Filter neighborsOf={ this.state.filterNeighbours } />
+      //        <ForceAtlas2 worker barnesHutOptimize barnesHutTheta={0.6} iterationsPerRender={10} linLogMode timeout={3000}/>
+      //        <RelativeSize initialSize={15}/>
+      //      </LoadGEXF>
+      //    </Sigma>
       return (
         <div>
           need a string here?
