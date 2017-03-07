@@ -12,9 +12,7 @@ type Props = {
   asxData: ?AsxDataType,
 };
 function GraphD3({ asxData } : Props) {
-  console.log('is it fetched');
-  if (!asxData) {
-    console.log('nope');
+  if (!asxData[0]) { // TODO drop the [0]
     // not fetched yet
     return null;
   }
@@ -70,10 +68,8 @@ export default compose(
   connect(mapStateToProps, mapActionsToProps),
   withJob(
     ({ params , asxData, fetchAsxData }) => {
-      if (asxData) {
-        console.log(`already have asxData ${asxData}`);
-        return fetchAsxData();
-       // return true;
+      if (asxData[0]) { // TODO keyed off to first element shoudl drop [0]
+        return true;
       }
       return fetchAsxData();
     },

@@ -13,7 +13,6 @@ function fetched(asxData: AsxData) : Action {
 }
 
 export function fetch() : ThunkAction {
-  console.log('hi');
   return (dispatch, getState, { axios }) => {
     dispatch(fetching());
 

@@ -26,11 +26,8 @@ const asxData : Reducer<State, Action> = combineReducers({
 // EXPORTED SELECTORS
 
 export function getAll(state : State) {
-  console.log('the state in getAll', state.all);
   return FromAll
-    //.getAll(state);
     .getAll(state.all);
-    //.getAll([]);
 }
 
 // -----------------------------------------------------------------------------
