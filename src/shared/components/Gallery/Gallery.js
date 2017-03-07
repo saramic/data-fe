@@ -7,7 +7,6 @@ import './globals.css';
 import Error404 from '../Error404';
 import Header from './Header';
 import Home from './Home';
-import GraphD3 from './GraphD3';
 import { safeConfigGet } from '../../utils/config';
 
 function Gallery() {
@@ -46,10 +45,60 @@ function Gallery() {
 
       <Match
         exactly
-        pattern="/pubnubEon"
+        pattern="/mapbox"
         render={routerProps =>
-          <CodeSplit chunkName="pubnubEon" modules={{ PubnubEon: require('./PubnubEon') }}>
-            { ({ PubnubEon }) => PubnubEon && <PubnubEon {...routerProps} /> }
+          <CodeSplit chunkName="mapbox" modules={{ MapBox: require('./MapBox') }}>
+            { ({ MapBox }) => MapBox && <MapBox {...routerProps} /> }
+          </CodeSplit>
+        }
+      />
+
+      <Match
+        exactly
+        pattern="/sigmajs"
+        render={routerProps =>
+          <CodeSplit chunkName="sigmajs" modules={{ SigmaJs: require('./SigmaJs') }}>
+            { ({ SigmaJs }) => SigmaJs && <SigmaJs {...routerProps} /> }
+          </CodeSplit>
+        }
+      />
+
+      <Match
+        exactly
+        pattern="/alchemy"
+        render={routerProps =>
+          <CodeSplit chunkName="alchemy" modules={{ Alchemy: require('./Alchemy') }}>
+            { ({ Alchemy }) => Alchemy && <Alchemy {...routerProps} /> }
+          </CodeSplit>
+        }
+      />
+
+      <Match
+        exactly
+        pattern="/chartJs"
+        render={routerProps =>
+          <CodeSplit chunkName="chartJs" modules={{ ChartJs: require('./ChartJs') }}>
+            { ({ ChartJs }) => ChartJs && <ChartJs {...routerProps} /> }
+          </CodeSplit>
+        }
+      />
+
+      <Match
+        exactly
+        pattern="/plotly"
+        render={routerProps =>
+          <CodeSplit chunkName="plotly" modules={{ Plotly: require('./Plotly') }}>
+            { ({ Plotly }) => Plotly && <Plotly {...routerProps} /> }
+          </CodeSplit>
+        }
+      />
+
+      <Match
+        exactly
+        pattern="/popoto"
+        render={routerProps =>
+          <CodeSplit chunkName="popoto" modules={{ Popoto: require('./Popoto') }}>
+            { ({ Popoto }) => Popoto && <Popoto {...routerProps} /> }
           </CodeSplit>
         }
       />
