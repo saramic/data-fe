@@ -45,14 +45,30 @@ const graph = {
 
 
 class SigmaJsSub extends React.Component {
+  constructor(props) {
+    super();
+    this.state = { server: true, hasWindow: props.hasWindow }
+  }
   render() {
-    const { Sigma, RandomizeNodePositions, RelativeSize } = require('react-sigma');
-    return (
-      <Sigma graph={{nodes:[{id:"n1", label:"Alice"}, {id:"n2", label:"Rabbit"}], edges:[{id:"e1",source:"n1",target:"n2",label:"SEES"}]}} settings={{drawEdges:true}}>
-          <RelativeSize initialSize={15}/>
-          <RandomizeNodePositions/>
-      </Sigma>
-    );
+    if(!this.state.hasWindow) {
+      return(<div>loading ...</div>);
+    } else {
+      const { Sigma, RandomizeNodePositions, RelativeSize, LoadJSON } = require('react-sigma');
+      // TODO following errors with
+      // VM8232:2 GET http://localhost:1337/data/sigma_graph.json net::ERR_CONNECTION_REFUSED
+      //  <Sigma style={{width:"200px", height:"200px"}}>
+      //    <LoadJSON path="/data/sigma_graph.json" />
+      //  </Sigma>
+      return (
+        <div>
+          need a string here?
+          <Sigma graph={{nodes:[{id:"n1", label:"Alice"}, {id:"n2", label:"Rabbit"}], edges:[{id:"e1",source:"n1",target:"n2",label:"SEES"}]}} settings={{drawEdges:true}}>
+              <RelativeSize initialSize={15}/>
+              <RandomizeNodePositions/>
+          </Sigma>
+        </div>
+      );
+    }
   }
 }
 
@@ -76,7 +92,8 @@ class SigmaJs extends React.Component {
       <div>
         <a href="http://sigmajs.org/">SigmaJs</a> is an option in the graph space
         { !this.state.isServer && this.sigmaComponent }
-        { !this.state.isServer && (<SigmaJsSub />) }
+        { !this.state.isServer && (<SigmaJsSub hasWindow="true" />) }
+        <SigmaJsSub />
       </div>
     );
   }
