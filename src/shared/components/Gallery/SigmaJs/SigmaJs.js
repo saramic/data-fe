@@ -43,6 +43,19 @@ const graph = {
   ]
 };
 
+
+class SigmaJsSub extends React.Component {
+  render() {
+    const { Sigma, RandomizeNodePositions, RelativeSize } = require('react-sigma');
+    return (
+      <Sigma graph={{nodes:[{id:"n1", label:"Alice"}, {id:"n2", label:"Rabbit"}], edges:[{id:"e1",source:"n1",target:"n2",label:"SEES"}]}} settings={{drawEdges:true}}>
+          <RelativeSize initialSize={15}/>
+          <RandomizeNodePositions/>
+      </Sigma>
+    );
+  }
+}
+
 class SigmaJs extends React.Component {
   constructor() {
     super();
@@ -63,6 +76,7 @@ class SigmaJs extends React.Component {
       <div>
         <a href="http://sigmajs.org/">SigmaJs</a> is an option in the graph space
         { !this.state.isServer && this.sigmaComponent }
+        { !this.state.isServer && (<SigmaJsSub />) }
       </div>
     );
   }
